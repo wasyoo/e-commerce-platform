@@ -1,0 +1,33 @@
+{
+  "name": "web-server",
+  "version": "1.0.0",
+  "description": "Plateforme E-Commerce",
+  "main": "src/index.js",
+  "author": "Wassim Lahbibi",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --exec babel-node --presets env,stage-2 src/index.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.3.1",
+    "apollo-server-express": "^2.3.1",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "bcrypt": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-import-resolver-webpack": "^0.8.4",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "express": "^4.16.4",
+    "graphql": "^14.0.2",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.2"
+  }
+}
