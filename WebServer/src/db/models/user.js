@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   address: String,
   phone: String,
-  role: String,
+  role: { type: String, default: 'client' },
 }, {
   collection: 'user',
   timestamps: true,

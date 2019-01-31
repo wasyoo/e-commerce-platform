@@ -7,7 +7,10 @@ type User {
     password: String
     phone: String
     address: String
+    role: String
     createdAt: String
+    updatedAt: String
+    order: Order
 }
 
 type UserLogged {
@@ -27,6 +30,12 @@ input UserInput {
     password:String
     phone: String
     address: String
+    role: String
+}
+
+input PasswordInput{
+    oldPassword: String
+    newPassword: String
 }
 `;
 

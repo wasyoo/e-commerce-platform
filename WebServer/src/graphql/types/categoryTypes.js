@@ -1,6 +1,6 @@
 const category = `
     type Category{
-        id: ID!
+        id: ID
         name: String
         parent: Category
         products :[Product]

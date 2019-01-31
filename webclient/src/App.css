@@ -1,0 +1,38 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  padding: 20px 30px;
+  margin: 80px 20px;
+}
+
+/* React Table */
+.rt-resizable-header{
+  height: 60px;
+  background: #eee;
+}
+
+.rt-tr-group:nth-child(even){
+  background: #eee;
+}
+
+.rt-td i{
+  margin : 0 10px;
+  font-size: 20px;
+}
+.ReactTable .rt-td{
+  text-align: center;
+}
+.icon-user-delete i{
+  color:rgb(255, 72, 0);
+}
+.icon-user-edit i{
+  color:rgb(0, 128, 96);
+}
+.icon-user-view i{
+  color:rgb(0, 183, 255);
+}
+/* End React Table */

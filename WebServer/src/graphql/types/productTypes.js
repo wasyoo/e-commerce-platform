@@ -3,8 +3,8 @@ const product = `
         id:ID!
         name: String,
         description: String,
-        price: Int,
-        quantity: Int,
+        price: String,
+        quantity: String,
         image: String,
         category: Category,
     }
@@ -12,8 +12,8 @@ const product = `
     input ProductInput{
         name: String,
         description: String,
-        price: Int,
-        quantity: Int,
+        price: String,
+        quantity: String,
         image: String,
         category: String,
     }
