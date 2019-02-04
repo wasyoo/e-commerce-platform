@@ -8,6 +8,8 @@ const orderSchema = new mongoose.Schema({
       quantity: Number,
     },
   ],
+  totalPrice: String,
+  totalQuantity: String,
 }, {
   collection: 'order',
   timestamps: true,

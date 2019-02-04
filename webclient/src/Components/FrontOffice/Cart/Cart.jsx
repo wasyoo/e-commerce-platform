@@ -1,12 +1,13 @@
 import React from 'react';
 import { Query } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { List, Button } from '@material-ui/core';
 import styles from './CartStyle';
 import GET_CART from '../../../graphql/Client/queries/cart/getCart';
 import CartItem from './CartItem';
 
-const Cart = ({ classes }) => (
+const Cart = ({ classes, history }) => (
   <Query query={GET_CART}>
     {
       ({ data: { cart }, loading }) => {
@@ -35,7 +36,16 @@ const Cart = ({ classes }) => (
                 <div className={classes.sub}>TOTAL TTC:</div>
                 <div className={classes.subPrice}>{`${cart.totalPrice} DT`}</div>
               </div>
-              <Button className={classes.validateBtn}> Valider </Button>
+              <Button
+                disabled={cart.items.length === 0}
+                className={classes.validateBtn}
+                onClick={(e) => {
+                  e.preventDefault();
+                  history.push('/print');
+                }}
+              >
+                Valider
+              </Button>
             </div>
           </div>
         );
@@ -43,4 +53,4 @@ const Cart = ({ classes }) => (
     }
   </Query>
 );
-export default withStyles(styles)(Cart);
+export default withStyles(styles)(withRouter(Cart));

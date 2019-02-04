@@ -36,7 +36,6 @@ export const resolvers = {
     },
 
     updateMe: (_, { user }, { cache }) => {
-      console.log(user);
       const data = {
         me: {
           __typename: 'Me',
@@ -90,7 +89,19 @@ export const resolvers = {
       cache.writeData({ data });
     },
 
-    changeCartStatus: (_, { open }, { cache }) => {
+    cleanCart: (_, { items, totalPrice, totalQuantity }, { cache }) => {
+      const data = {
+        cart: {
+          __typename: 'Cart',
+          items,
+          totalQuantity,
+          totalPrice,
+        },
+      };
+      cache.writeData({ data });
+    },
+
+    changeCartStatus: (_, { open }, { cache }) => {      
       const data = {
         cartStatus: {
           __typename: 'CartStatus',

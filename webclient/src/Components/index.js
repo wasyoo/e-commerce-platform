@@ -13,6 +13,7 @@ import Navbar from './FrontOffice/Navbar/Navbar';
 import Register from './FrontOffice/User/Register';
 import EditUser from './FrontOffice/User/EditUser';
 import EditPassWord from './FrontOffice/User/EditPassword';
+import PrintOrder from './FrontOffice/PurchaseOrder/PrintOrder';
 
 export {
   Login,
@@ -30,4 +31,5 @@ export {
   Register,
   EditUser,
   EditPassWord,
+  PrintOrder,
 };

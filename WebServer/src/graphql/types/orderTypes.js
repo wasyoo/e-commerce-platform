@@ -3,6 +3,8 @@ const order = `
     id: ID!
     user: User
     items: [OrderItem]
+    totalPrice: Float
+    totalQuantity: Int
   }
 
   type OrderItem{
@@ -11,12 +13,14 @@ const order = `
   }
   
   input OrderItemInput {
-    product: String!
+    product: ID!
     quantity: Int!
   }
 
   input InputOrder{
     items: [OrderItemInput]!
+    totalPrice: Float
+    totalQuantity: Int
   }
 `;
 

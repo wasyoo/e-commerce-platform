@@ -19,13 +19,13 @@ const ProductList = ({ classes, product, changeCartStatus }) => (
       >
         <Tooltip title="Ajouter au panier" placement="top-end">
           <Mutation mutation={ADD_ONE_ITEM} variables={{ input: product }}>
-            {(minusOneItem) => (
+            {(addOneItem) => (
               <Button
                 size="small"
                 className={classes.addShoppingCart}
                 onClick={(e) => {
                   e.preventDefault();
-                  minusOneItem();
+                  addOneItem();
                   changeCartStatus();
                 }}
               >

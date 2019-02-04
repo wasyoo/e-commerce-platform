@@ -6,9 +6,8 @@ import {
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import {
   withStyles, AppBar, Toolbar, IconButton, Typography,
-  InputBase, Badge, Link,
+  Badge, Link,
 } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import Mouse from '@material-ui/icons/Mouse';
 import styles from './navbarStyle';
 import GET_CART from '../../../graphql/Client/queries/cart/getCart';

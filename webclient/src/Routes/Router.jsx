@@ -4,7 +4,7 @@ import PrivateRoute from './PrivateRouter';
 import PrivateAdminRoute from './PrivateAdminRoute';
 import {
   Login, Home, ProductBO, AddProduct, CategoryBO,
-  UpdateProduct, AddCategory, UpdateCtegory,
+  UpdateProduct, AddCategory, UpdateCtegory, PrintOrder,
   DetailsProduct, Register, Navbar, EditUser, EditPassWord,
 } from '../Components';
 
@@ -17,8 +17,9 @@ const Router = () => (
         <Route path="/signin" component={Login} />
         <Route path="/product/:id" component={DetailsProduct} />
         <Route path="/register" component={Register} />
-        <Route path="/edit-user" component={EditUser} />
-        <Route path="/edit-password" component={EditPassWord} />
+        <PrivateRoute path="/edit-user" component={EditUser} />
+        <PrivateRoute path="/edit-password" component={EditPassWord} />
+        <PrivateRoute path="/print" component={PrintOrder} />
         <PrivateAdminRoute path="/admin/product" component={ProductBO} />
         <PrivateAdminRoute path="/admin/add-product" component={AddProduct} />
         <PrivateAdminRoute path="/admin/categories" component={CategoryBO} />
