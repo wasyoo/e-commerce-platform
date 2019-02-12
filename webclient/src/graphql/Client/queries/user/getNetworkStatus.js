@@ -5,6 +5,7 @@ const GET_NETWORK_STATUS = gql`
     networkStatus @client {
       isConnected
       role
+      typeOfAuth
     }
   }
 `;

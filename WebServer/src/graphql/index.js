@@ -1,4 +1,4 @@
-import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServer, gql } from 'apollo-server';
 import Type from './types';
 import { queriesType, queries } from './queries';
 import { mutationsType, mutations } from './mutations';

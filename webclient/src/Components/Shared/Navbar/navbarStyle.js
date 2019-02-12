@@ -4,6 +4,7 @@ export default (theme) => ({
   root: {
     width: '100%',
     backgroundColor: '#1b1a20',
+    position: 'sticky',
   },
   grow: {
     flexGrow: 1,
@@ -73,5 +74,24 @@ export default (theme) => ({
     fontSize: 18,
     margin: '20px 5px',
     textDecoration: 'none',
+  },
+  drawer: {
+    backgroundColor: '',
+    width: '30vw',
+  },
+  topBar: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#eee',
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '0 20px',
+    alignItems: 'center',
+  },
+  topBarInfo: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    margin: '0 20px',
   },
 });

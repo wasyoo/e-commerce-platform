@@ -3,9 +3,7 @@ export default (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
-    width: '100vw',
-    height: '90vh',
+    alignItems: 'left',
   },
   form: {
     display: 'flex',
@@ -14,9 +12,7 @@ export default (theme) => ({
     alignItems: 'center',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 350,
+    width: '100%',
   },
   button: {
     margin: theme.spacing.unit,

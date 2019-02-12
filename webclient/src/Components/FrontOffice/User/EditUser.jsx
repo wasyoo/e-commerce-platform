@@ -3,7 +3,7 @@ import {
   Mutation, Query, compose, graphql,
 } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
-import styles from '../../BackOffice/Product/ProductStyle';
+import styles from '../../Shared/Styles/FormStyle';
 import UserForm from './UserForm';
 import EDIT_USER from '../../../graphql/mutations/user/editUser';
 import ME from '../../../graphql/Client/queries/user/getMe';
@@ -26,9 +26,9 @@ const EditUser = ({ classes, history, updateMe }) => (
         }
         return (
           <Query query={ME}>
-            {({ data }) => {
+            {({ data: { me } }) => {
               if (data) {
-                return <UserForm buttonText="Modifier" user={data.me.user} onSubmit={editUser} />;
+                return <UserForm buttonText="Modifier" user={me.user} onSubmit={editUser} />;
               }
               return null;
             }}

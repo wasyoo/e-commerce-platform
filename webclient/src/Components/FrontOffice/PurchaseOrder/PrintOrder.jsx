@@ -12,16 +12,19 @@ import CHANGE_CART_STATUS from '../../../graphql/Client/mutations/cart/changeCar
 import ADD_ORDER from '../../../graphql/mutations/order/addOrder';
 import GET_CART from '../../../graphql/Client/queries/cart/getCart';
 import CLEAN_CART from '../../../graphql/Client/mutations/cart/cleanCart';
+import SEND_ATTACH_EMAIL from '../../../graphql/mutations/order/sendAttachEmail';
 
 const downloadFile = (canvas) => {
   const imgData = canvas.toDataURL('image/png');
+  // eslint-disable-next-line new-cap
   const pdf = new jsPDF('p', 'pt', 'a4');
   pdf.addImage(imgData, 'PNG', 0, 0);
   pdf.save('download.pdf');
+  return pdf.output('blob');
 };
 
 const PrintOrder = ({
-  history, classes, changeCartStatus, cleanCart,
+  history, classes, changeCartStatus, cleanCart, sendAttachEmail,
 }) => (
   <div className={classes.printOrderSection}>
     <div className={classes.buttonAction}>
@@ -39,8 +42,6 @@ const PrintOrder = ({
                       const input = document.getElementById('capture_order');
                       const canvas = await html2canvas(input);
 
-                      await downloadFile(canvas);
-
                       const orderItems = cart.items.map((item) => ({
                         product: item.product.id,
                         quantity: item.quantity,
@@ -56,6 +57,8 @@ const PrintOrder = ({
                         },
                       });
 
+                      const pdfFile = await downloadFile(canvas);
+
                       await changeCartStatus({ variables: { open: true } });
 
                       await cleanCart({
@@ -67,6 +70,8 @@ const PrintOrder = ({
                       });
 
                       history.push('/');
+
+                      await sendAttachEmail({ variables: { input: { file: pdfFile, email: 'wassim.lahbibi@gmail.com' } } });
                     }}
                   >
                     {(loading) ? 'Validation en cours...' : 'Valider'}
@@ -91,5 +96,6 @@ const PrintOrder = ({
 );
 export default compose(
   graphql(CHANGE_CART_STATUS, { name: 'changeCartStatus' }),
-  graphql(CLEAN_CART, { name: 'cleanCart' })
+  graphql(CLEAN_CART, { name: 'cleanCart' }),
+  graphql(SEND_ATTACH_EMAIL, { name: 'sendAttachEmail' }),
 )(withStyles(styles)(withRouter(PrintOrder)));

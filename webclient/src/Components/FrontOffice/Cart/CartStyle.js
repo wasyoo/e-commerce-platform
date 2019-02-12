@@ -1,7 +1,6 @@
 export default {
   cartList: {
     width: '100%',
-    padding: 20,
     height: '100%',
     border: '1px solid #000; border-width: 1px 0px 0px',
   },
@@ -9,9 +8,13 @@ export default {
     justifyContent: 'space-between',
     alignItems: 'center',
     border: '1px solid #000; border-width: 0px 0px 1px',
+    padding: 10,
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      cursor: 'pointer',
+    },
   },
   media: {
-    width: '100px',
     height: '100px',
     display: 'flex',
     justifyContent: 'center',
@@ -41,7 +44,7 @@ export default {
   },
   itemText: {
     color: '#fff',
-    fontWeight: 300,
+    textAlign: 'center',
   },
   itemTextSecodary: {
     color: '#fff',
@@ -51,6 +54,11 @@ export default {
   cartBtn: {
     color: '#fff',
     minWidth: 30,
+    backgroundColor: '#eeeeee10',
+    margin: '0 5px',
+    '&:hover': {
+      backgroundColor: 'rgba(231, 193, 0, 0.3);',
+    },
   },
   cartHeader: {
     display: 'flex',

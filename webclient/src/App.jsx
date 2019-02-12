@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { ApolloLink } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { setContext } from 'apollo-link-context';
+import { withClientState } from 'apollo-link-state';
+import { createUploadLink } from 'apollo-upload-client';
 import { persistCache } from 'apollo-cache-persist';
 import Router from './Routes/Router';
 import { defaultState, resolvers } from './graphql/Client/resolvers';
@@ -15,20 +19,30 @@ class App extends Component {
 
   componentDidMount = async () => {
     const cache = new InMemoryCache();
-    const client = new ApolloClient({
+
+    const uploadLink = createUploadLink({
       uri: process.env.REACT_APP_GRAPHQL_URL,
+    });
+
+    const authLink = setContext((_, { headers }) => {
+      const token = localStorage.getItem('token');
+      return {
+        headers: {
+          ...headers,
+          authorization: token,
+        },
+      };
+    });
+
+    const stateLink = withClientState({
+      defaults: defaultState,
+      resolvers,
       cache,
-      request: async (operation) => {
-        operation.setContext({
-          headers: {
-            authorization: localStorage.getItem('token'),
-          },
-        });
-      },
-      clientState: {
-        defaults: defaultState,
-        resolvers,
-      },
+    });
+
+    const client = new ApolloClient({
+      link: ApolloLink.from([authLink, stateLink, uploadLink]),
+      cache,
     });
 
     try {
@@ -37,6 +51,7 @@ class App extends Component {
         storage: window.localStorage,
       });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error restoring Apollo cache', error);
     }
     this.setState({
@@ -49,7 +64,7 @@ class App extends Component {
     const { client, loaded } = this.state;
 
     if (!loaded) {
-      return <div>Loading...</div>;
+      return <div>Chargement...</div>;
     }
 
     return (

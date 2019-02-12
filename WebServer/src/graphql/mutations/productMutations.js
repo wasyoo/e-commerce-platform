@@ -14,7 +14,7 @@ export const productResolvers = {
   editProduct: async (_, { id, input }, { models }) => {
     const product = await models.Product.findById(id);
     if (!product) {
-      throw new Error(`Couldn't find product with id ${product}`);
+      throw new Error(`Impossible de trouver le produit avec l'identifiant ${product}`);
     }
     return models.Product.findOneAndUpdate({ _id: id }, { ...input }, { new: true });
   },

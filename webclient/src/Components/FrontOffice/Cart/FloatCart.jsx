@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles, Drawer } from '@material-ui/core';
 import { Query, Mutation } from 'react-apollo';
-import Cart from '../Cart/Cart';
+import Cart from './Cart';
 import GET_CART_STATUS from '../../../graphql/Client/queries/cart/getCartStatus';
 import CHANGE_CART_STATUS from '../../../graphql/Client/mutations/cart/changeCartStatus';
 

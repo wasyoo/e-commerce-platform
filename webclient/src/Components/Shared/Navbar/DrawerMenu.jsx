@@ -3,7 +3,7 @@ import {
   withStyles, IconButton, Drawer, Divider,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import MenuList from '../../BackOffice/Header/MenuList';
+import MenuBOList from './MenuBOList';
 import styles from './navbarStyle';
 
 class DrawerMenu extends Component {
@@ -25,7 +25,7 @@ class DrawerMenu extends Component {
         <IconButton onClick={this.toggleDrawer(true)} className={classes.menuButton} color="inherit" aria-label="Open drawer">
           <MenuIcon />
         </IconButton>
-        <Drawer open={drawer} onClose={this.toggleDrawer(false)}>
+        <Drawer open={drawer} className={classes.drawer} onClose={this.toggleDrawer(false)}>
           <div
             tabIndex={0}
             role="button"
@@ -38,7 +38,7 @@ class DrawerMenu extends Component {
               </IconButton>
             </div>
             <Divider />
-            <MenuList toggleDrawer={(open) => this.toggleDrawer(open)} />
+            <MenuBOList toggleDrawer={(open) => this.toggleDrawer(open)} />
           </div>
         </Drawer>
       </>

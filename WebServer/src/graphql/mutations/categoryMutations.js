@@ -14,7 +14,7 @@ export const categoryResolvers = {
   editCategory: async (_, { id, input }, { models }) => {
     const category = await models.Category.findById(id);
     if (!category) {
-      throw new Error(`Couldn't find category with id ${category}`);
+      throw new Error(`Impossible de trouver la catégorie avec l'identifiant ${category}`);
     }
     return models.Category.findOneAndUpdate(
       { _id: id }, { ...input },

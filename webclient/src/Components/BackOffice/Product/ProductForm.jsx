@@ -2,29 +2,32 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import styles from './ProductStyle';
+import styles from '../../Shared/Styles/FormStyle';
 import SelectCategory from './SelectCategory';
+import Error from '../../Shared/Errors/ErrorMessage';
 
 class ProductForm extends Component {
   static defaultProps = {
     product: {},
     buttonText: 'Valider',
+    error: '',
   }
 
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     product: PropTypes.object,
     buttonText: PropTypes.string,
+    error: PropTypes.string,
   }
 
   state = {
+    error: this.props.error || '',
     id: this.props.product.id || '',
     name: this.props.product.name || '',
     price: this.props.product.price || '',
     quantity: this.props.product.quantity || '',
     description: this.props.product.description || '',
     category: (this.props.product.category && this.props.product.category.id) || '',
-    image: this.props.product.image || '',
   }
 
   handleChange = (event) => {
@@ -33,6 +36,53 @@ class ProductForm extends Component {
       [name]: value,
     });
   };
+
+  handleSubmit = async (event) => {
+    const {
+      name, price, quantity, description, id, category,
+    } = this.state;
+
+    const [files] = event.target.image.files;
+
+    let image;
+
+    if (files) {
+      const data = new FormData();
+
+      data.append('file', files);
+      data.append('upload_preset', 'wy9jxzfu');
+
+      const res = await fetch('https://api.cloudinary.com/v1_1/dahnj3ljv/image/upload', {
+        method: 'POST',
+        body: data,
+      });
+
+      const file = await res.json();
+      if (!file.error) {
+        image = file.secure_url;
+      } else {
+        this.setState({
+          error: file.error,
+        });
+      }
+    }
+
+    this.props.onSubmit({
+      variables: {
+        id,
+        input: {
+          name,
+          price,
+          quantity,
+          description,
+          image,
+          category,
+        },
+      },
+    });
+
+    return null;
+  }
 
   validateForm = () => {
     const {
@@ -43,9 +93,9 @@ class ProductForm extends Component {
   }
 
   render() {
-    const { classes, onSubmit, buttonText } = this.props;
+    const { classes, buttonText } = this.props;
     const {
-      name, price, quantity, description, image, id, category,
+      name, price, quantity, description, category, error,
     } = this.state;
     return (
       <form
@@ -54,21 +104,10 @@ class ProductForm extends Component {
         autoComplete="off"
         onSubmit={(e) => {
           e.preventDefault();
-          onSubmit({
-            variables: {
-              id,
-              input: {
-                name,
-                price,
-                quantity,
-                description,
-                image,
-                category,
-              },
-            },
-          });
+          this.handleSubmit(e);
         }}
       >
+        {error && (<Error error={error} />)}
         <TextField
           name="name"
           label="Libellé"
@@ -105,10 +144,8 @@ class ProductForm extends Component {
         <TextField
           name="image"
           label="Image"
-          type="text"
+          type="file"
           className={classes.textField}
-          value={image}
-          onChange={this.handleChange}
           margin="normal"
           variant="outlined"
         />

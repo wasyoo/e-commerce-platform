@@ -12,6 +12,7 @@ const LOGIN = gql`
       phone
       role
       address
+      typeOfAuth
       order {
         id
         items {

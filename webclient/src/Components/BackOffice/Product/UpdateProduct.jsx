@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ProductForm from './ProductForm';
 import UPDATE_PRODUCT from '../../../graphql/mutations/product/upadateProduct';
 import GET_PRODUCTS from '../../../graphql/queries/product/getProducts';
-import styles from './ProductStyle';
+import styles from '../../Shared/Styles/FormStyle';
 
 const UpdateProduct = ({ classes, history, location: { product } }) => (
   <div className={classes.container}>

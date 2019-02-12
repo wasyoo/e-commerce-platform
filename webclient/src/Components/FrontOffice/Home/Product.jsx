@@ -1,7 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
 import getProducts from '../../../graphql/queries/product/getProducts';
 import ProductList from './ProductList';
 
@@ -27,4 +26,4 @@ const Product = () => (
   </div>
 );
 
-export default withStyles()(Product);
+export default Product;

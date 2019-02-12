@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
-import styles from '../../BackOffice/Product/ProductStyle';
+import styles from '../../Shared/Styles/FormStyle';
 import EDIT_PASSWORD from '../../../graphql/mutations/user/editPassword';
+import Error from '../../Shared/Errors/ErrorMessage';
 
 class EditPassword extends Component {
   state = {
@@ -36,7 +37,7 @@ class EditPassword extends Component {
           variables={{ input: { oldPassword, newPassword } }}
         >
           {
-            (editPasswordUser, { loading, data }) => {
+            (editPasswordUser, { loading, data, error }) => {
               if (loading) return <h3>Modification en cours ...</h3>;
               if (data) {
                 history.push('/');
@@ -51,6 +52,7 @@ class EditPassword extends Component {
                     editPasswordUser();
                   }}
                 >
+                  {error && (<Error error={error} />)}
                   <TextField
                     name="oldPassword"
                     label="Ancien mot de passe"

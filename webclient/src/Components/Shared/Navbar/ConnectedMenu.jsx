@@ -26,6 +26,7 @@ class RenderMenu extends Component {
     this.props.updateNeworkStatus({
       variables: {
         isConnected: false,
+        typeOfAuth: null,
         role: null,
       },
     })
@@ -54,12 +55,12 @@ class RenderMenu extends Component {
           onClose={this.handleMenuClose}
         >
           <MenuItem onClick={this.handleMenuClose}>
-            <Link component={RouterLink} className={classes.connexion} color="inherit" variant="body1" to="/signin">
+            <Link component={RouterLink} className={classes.connexion} color="inherit" variant="body1" to="/edit-user">
               Modifier
             </Link>
           </MenuItem>
           <MenuItem onClick={this.handleMenuClose}>
-            <Link component={RouterLink} className={classes.connexion} color="inherit" variant="body1" to="/register">
+            <Link component={RouterLink} className={classes.connexion} color="inherit" variant="body1" to="/edit-password">
               Changer mot de passe
             </Link>
           </MenuItem>

@@ -22,6 +22,7 @@ const ProductList = ({ classes, product, changeCartStatus }) => (
             {(addOneItem) => (
               <Button
                 size="small"
+                disabled={product.quantity <= 0}
                 className={classes.addShoppingCart}
                 onClick={(e) => {
                   e.preventDefault();

@@ -2,7 +2,7 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import styles from '../Product/ProductStyle';
+import styles from '../../Shared/Styles/FormStyle';
 import CategoryForm from './CategoryForm';
 import UPDATE_CATEGORY from '../../../graphql/mutations/category/updateCategory';
 import GET_GATEGORIES from '../../../graphql/queries/category/getAllCatergories';

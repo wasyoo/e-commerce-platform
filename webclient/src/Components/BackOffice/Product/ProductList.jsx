@@ -52,7 +52,7 @@ class ProductList extends Component {
                 },
               },
               onClick: (e, item) => {
-                alert(`You clicked product ${item.name}`);
+                this.props.history.push(`/product/${item.id}`);
               },
             },
             {

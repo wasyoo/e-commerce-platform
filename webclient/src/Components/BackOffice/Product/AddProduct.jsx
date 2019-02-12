@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ProductForm from './ProductForm';
 import ADD_PRODUCT from '../../../graphql/mutations/product/addProduct';
 import GET_PRODUCTS from '../../../graphql/queries/product/getProducts';
-import styles from './ProductStyle';
+import styles from '../../Shared/Styles/FormStyle';
 
 const AddProduct = ({ classes, history }) => (
   <div className={classes.container}>

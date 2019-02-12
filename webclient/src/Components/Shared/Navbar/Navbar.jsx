@@ -17,11 +17,13 @@ import UPDATE_NETWORK_STATUS from '../../../graphql/Client/mutations/user/udpdat
 import NoconnectedMenu from './NoConnectedMenu';
 import ConnectedMenu from './ConnectedMenu';
 import DrawerMenu from './DrawerMenu';
-import SearchBar from './SearchBar';
+import TopBar from './TopBanner';
+import FloatCart from '../../FrontOffice/Cart/FloatCart';
 
 const Navbar = ({ classes, networkStatus: { networkStatus } }) => (
   <div>
-    <AppBar position="fixed" className={classes.root}>
+    <TopBar />
+    <AppBar position="sticky" className={classes.root}>
       <Toolbar>
         {networkStatus.role === 'admin' && (
           <DrawerMenu />
@@ -30,12 +32,11 @@ const Navbar = ({ classes, networkStatus: { networkStatus } }) => (
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
             <Mouse />
             {' '}
-                CyberShop
+            CyberShop
             {' '}
             {networkStatus.role === 'admin' && <small>Admin</small>}
           </Typography>
         </Link>
-        <SearchBar />
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}>
           {!networkStatus.isConnected && (
@@ -80,6 +81,7 @@ const Navbar = ({ classes, networkStatus: { networkStatus } }) => (
           <NoconnectedMenu />
         )}
       </Toolbar>
+      <FloatCart />
     </AppBar>
   </div>
 );

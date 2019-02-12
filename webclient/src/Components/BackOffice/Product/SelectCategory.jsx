@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { Query } from 'react-apollo';
 import GET_CATEGORIES from '../../../graphql/queries/category/getAllCatergories';
-import styles from './ProductStyle';
+import styles from '../../Shared/Styles/FormStyle';
 
 class SelectCategory extends Component {
   state = {

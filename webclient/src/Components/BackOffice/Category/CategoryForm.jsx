@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
-import styles from '../Product/ProductStyle';
+import styles from '../../Shared/Styles/FormStyle';
 
 class CategoryForm extends Component {
   static defaultProps = {

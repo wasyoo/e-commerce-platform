@@ -4,9 +4,11 @@ const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
+  password: String,
   address: String,
   phone: String,
+  typeOfAuth: String,
+  avatar: String,
   role: { type: String, default: 'client' },
 }, {
   collection: 'user',

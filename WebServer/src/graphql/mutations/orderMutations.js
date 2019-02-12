@@ -13,7 +13,7 @@ const updateProductQuantity = (items, models) => new Promise((resolve, reject) =
         { quantity: (product.quantity - item.quantity) }
       ));
     } else {
-      reject(new Error('the quantity is not available'));
+      reject(new Error('la quantité n\'est pas disponible'));
     }
   });
 });
@@ -32,7 +32,7 @@ export const orderResolvers = {
   editOrder: async (_, { id, input }, { models }) => {
     const order = await models.Order.findOne({ _id: id });
     if (!order) {
-      throw new Error(`Couldn't find order with id ${order}`);
+      throw new Error(`Impossible de trouver la commande avec l'identifiant ${order}`);
     }
     return models.Order.findOneAndUpdate(
       { _id: id }, { ...input },

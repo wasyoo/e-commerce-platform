@@ -1,13 +1,14 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { Query, compose, graphql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { List, Button } from '@material-ui/core';
 import styles from './CartStyle';
 import GET_CART from '../../../graphql/Client/queries/cart/getCart';
+import CHANGE_CART_STATUS from '../../../graphql/Client/mutations/cart/changeCartStatus';
 import CartItem from './CartItem';
 
-const Cart = ({ classes, history }) => (
+const Cart = ({ classes, history, changeCartStatus }) => (
   <Query query={GET_CART}>
     {
       ({ data: { cart }, loading }) => {
@@ -42,6 +43,7 @@ const Cart = ({ classes, history }) => (
                 onClick={(e) => {
                   e.preventDefault();
                   history.push('/print');
+                  changeCartStatus({ variables: { open: true } });
                 }}
               >
                 Valider
@@ -53,4 +55,6 @@ const Cart = ({ classes, history }) => (
     }
   </Query>
 );
-export default withStyles(styles)(withRouter(Cart));
+export default compose(
+  graphql(CHANGE_CART_STATUS, { name: 'changeCartStatus' })
+)(withStyles(styles)(withRouter(Cart)));

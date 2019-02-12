@@ -4,6 +4,7 @@ export const defaultState = {
   networkStatus: {
     __typename: 'NetworkStatus',
     isConnected: false,
+    typeOfAuth: null,
     role: null,
   },
   me: {
@@ -24,11 +25,12 @@ export const defaultState = {
 
 export const resolvers = {
   Mutation: {
-    updateNetworkStatus: (_, { isConnected, role }, { cache }) => {
+    updateNetworkStatus: (_, { isConnected, role, typeOfAuth }, { cache }) => {
       const data = {
         networkStatus: {
           __typename: 'NetworkStatus',
           isConnected,
+          typeOfAuth,
           role,
         },
       };

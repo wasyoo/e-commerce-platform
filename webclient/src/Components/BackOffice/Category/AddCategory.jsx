@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ADD_CATEGORY from '../../../graphql/mutations/category/addCategory';
 import GET_CATEGORIES from '../../../graphql/queries/category/getAllCatergories';
 import CategoryForm from './CategoryForm';
-import styles from '../Product/ProductStyle';
+import styles from '../../Shared/Styles/FormStyle';
 
 const AddCategory = ({ classes, history }) => (
   <div className={classes.container}>

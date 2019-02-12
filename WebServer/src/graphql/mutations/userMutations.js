@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { generateTokenForUser } from '../../utils/jwt.utils.js';
 
 export const userMutations = `
@@ -11,7 +11,10 @@ export const userMutations = `
 
 export const userResolvers = {
   register: async (_, { input }, { models }) => {
-    const passwordHash = bcrypt.hashSync(input.password, 10);
+    let passwordHash;
+    if (input.password) {
+      passwordHash = bcrypt.hashSync(input.password, 10);
+    }
     const user = new models.User({
       ...input,
       password: passwordHash,
@@ -25,12 +28,12 @@ export const userResolvers = {
   },
 
   login: async (_, { input }, { models }) => {
-    const user = await models.User.findOne({ email: input.email });
+    const user = await models.User.findOne({ email: input.email, typeOfAuth: input.typeOfAuth });
     if (!user) {
-      throw new Error('wrong email');
+      throw new Error('Mauvaise adresse mail');
     }
     if (!bcrypt.compareSync(input.password, user.password)) {
-      throw new Error('Wrong password');
+      throw new Error('Mauvais mot de passe');
     }
     const token = generateTokenForUser(user.id);
     return {
@@ -42,7 +45,7 @@ export const userResolvers = {
     // check if user is existed
     const user = await models.User.findById(userId);
     if (!user) {
-      throw new Error(`Couldn't find user with id ${user}`);
+      throw new Error(`Impossible de trouver l'utilisateur avec l'identifiant ${user}`);
     }
     // check if password is provided
     let passwordHash;
@@ -50,7 +53,7 @@ export const userResolvers = {
       if (bcrypt.compareSync(input.password, user.password)) {
         passwordHash = bcrypt.hashSync(input.password, 10);
       } else {
-        throw new Error('Wrong password');
+        throw new Error('Mauvais mot de passe');
       }
     } else {
       passwordHash = user.password;
@@ -65,10 +68,10 @@ export const userResolvers = {
     // check if user is existed
     const user = await models.User.findById(userId);
     if (!user) {
-      throw new Error(`Couldn't find user with id ${user}`);
+      throw new Error(`Impossible de trouver l'utilisateur avec l'identifiant ${user}`);
     }
     if (!bcrypt.compareSync(input.oldPassword, user.password)) {
-      throw new Error('Wrong password');
+      throw new Error('Mauvais mot de passe');
     }
     const newPasswordHash = bcrypt.hashSync(input.newPassword, 10);
 

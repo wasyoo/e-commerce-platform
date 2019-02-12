@@ -4,9 +4,9 @@
   box-sizing: border-box;
 }
 
-.App {
-  padding: 20px 30px;
-  margin: 80px 20px;
+.page-container {
+  /* padding: 20px 30px; */
+  margin: 30px 20px;
 }
 
 /* React Table */

@@ -14,6 +14,10 @@ export default {
       backgroundColor: '#e8c000',
       color: '#1b1a20',
     },
+    '&:disabled': {
+      backgroundColor: '#eee',
+      color: '#00000075',
+    },
   },
   card: {
     maxWidth: 345,

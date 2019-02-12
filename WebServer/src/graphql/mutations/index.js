@@ -2,6 +2,8 @@ import { userMutations, userResolvers } from './userMutations';
 import { categoryMutations, categoryResolvers } from './categoryMutations';
 import { productMutations, productResolvers } from './productMutations';
 import { orderMutations, orderResolvers } from './orderMutations';
+import { attachEmailMutations, attachEmailResolvers } from './attachEmailMutations';
+import { emailMutations, emailResolvers } from './emailMutations';
 
 export const mutationsType = `
   type Mutation {
@@ -9,6 +11,8 @@ export const mutationsType = `
     ${categoryMutations}
     ${productMutations}
     ${orderMutations}
+    ${attachEmailMutations}
+    ${emailMutations}
   }
 `;
 
@@ -17,4 +21,6 @@ export const mutations = Object.assign(
   categoryResolvers,
   productResolvers,
   orderResolvers,
+  attachEmailResolvers,
+  emailResolvers,
 );

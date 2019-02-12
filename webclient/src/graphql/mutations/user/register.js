@@ -9,8 +9,11 @@ mutation Register($input: UserInput) {
       firstName
       lastName
       email
-      password
+      avatar
+      address
+      phone
       role
+      typeOfAuth
     }
   }
 }
