@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
-import { compose, graphql } from 'react-apollo';
+import { compose, graphql, Query } from 'react-apollo';
 import {
-  withStyles, MenuItem, Menu, Link, IconButton,
+  withStyles, MenuItem, Menu, Link, Chip, Avatar,
 } from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import styles from './navbarStyle';
 import UPDATE_NETWORK_STATUS from '../../../graphql/Client/mutations/user/udpdateNetworkState';
+import GET_ME from '../../../graphql/Client/queries/user/getMe';
 
 class RenderMenu extends Component {
   state = {
@@ -39,14 +39,26 @@ class RenderMenu extends Component {
     const isMenuOpen = Boolean(anchorEl);
     return (
       <>
-        <IconButton
-          aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-          aria-haspopup="true"
-          onClick={this.handleProfileMenuOpen}
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
+        <Query query={GET_ME}>
+          {
+            ({ data }) => {
+              const { firstName, lastName, avatar } = data.me.user;
+              return (
+                <Chip
+                  avatar={
+                    avatar
+                      ? <Avatar alt={firstName} src={avatar} />
+                      : <Avatar>{firstName.slice(0, 1).toUpperCase()}</Avatar>
+                  }
+                  label={`${firstName} ${lastName}`}
+                  onClick={this.handleProfileMenuOpen}
+                  className={classes.chip}
+                />
+              );
+            }
+          }
+
+        </Query>
         <Menu
           anchorEl={anchorEl}
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, TextField, Button } from '@material-ui/core';
+import { withStyles, Button } from '@material-ui/core';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import styles from './LoginStyle';
 
 class LoginForm extends Component {
@@ -41,13 +42,13 @@ class LoginForm extends Component {
     const { classes, onSubmit } = this.props;
     const { email, password } = this.state;
     return (
-      <form
+      <ValidatorForm
         className={classes.form}
         noValidate
         autoComplete="off"
         onSubmit={(event) => this.handleSubmit(event, onSubmit)}
       >
-        <TextField
+        <TextValidator
           name="email"
           label="Email"
           type="email"
@@ -57,8 +58,10 @@ class LoginForm extends Component {
           onChange={this.handleChange}
           margin="normal"
           variant="outlined"
+          validators={['required', 'isEmail']}
+          errorMessages={['Ce champ est requis', 'L\'email n\'est pas valide']}
         />
-        <TextField
+        <TextValidator
           name="password"
           label="Mot de passe"
           type="password"
@@ -68,6 +71,8 @@ class LoginForm extends Component {
           onChange={this.handleChange}
           margin="normal"
           variant="outlined"
+          validators={['required']}
+          errorMessages={['Ce champ est requis']}
         />
         <Button
           type="submit"
@@ -77,7 +82,7 @@ class LoginForm extends Component {
         >
                 S&apos;authentifier
         </Button>
-      </form>
+      </ValidatorForm>
     );
   }
 }

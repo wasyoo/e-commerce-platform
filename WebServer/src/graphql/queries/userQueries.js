@@ -7,5 +7,5 @@ export const userQueries = `
 export const userResolvers = {
   me: (_, $, { userId, models }) => models.User.findById(userId),
   user: (_, { id }, { models }) => models.User.findById(id),
-  users: (_, $, { models }) => models.User.find({}, {}, { sort: { createdAt: -1 } }),
+  users: (_, $, { models }) => models.User.find({ role: 'client' }, {}, { sort: { createdAt: -1 } }),
 };

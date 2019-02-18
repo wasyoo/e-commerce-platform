@@ -10,6 +10,7 @@ const orderSchema = new mongoose.Schema({
   ],
   totalPrice: String,
   totalQuantity: String,
+  state: { type: String, default: 'waiting' },
 }, {
   collection: 'order',
   timestamps: true,

@@ -10,6 +10,7 @@ const GET_ME = gql`
         email
         phone
         address
+        avatar
       }
     }
   }

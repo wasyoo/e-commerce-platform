@@ -14,6 +14,9 @@ import EditUser from './FrontOffice/User/EditUser';
 import EditPassWord from './FrontOffice/User/EditPassword';
 import PrintOrder from './FrontOffice/PurchaseOrder/PrintOrder';
 import Contact from './FrontOffice/Contact/Conatct';
+import FlashMsg from './Shared/FlashMSg/FlashMsg';
+import Order from './BackOffice/Order/Order';
+import Client from './BackOffice/Client/Client';
 
 export {
   Login,
@@ -32,4 +35,7 @@ export {
   EditPassWord,
   PrintOrder,
   Contact,
+  FlashMsg,
+  Order,
+  Client,
 };

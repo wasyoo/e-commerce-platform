@@ -4,6 +4,7 @@ const SEND_ATTACH_EMAIL = gql`
   mutation SendAttachEmail($input: InputAttachMail) {
     sendAttachEmail(input: $input) {
       email
+      name
       status
     }
   }

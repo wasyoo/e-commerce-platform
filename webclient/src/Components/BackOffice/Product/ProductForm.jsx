@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { TextField, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import PropTypes from 'prop-types';
 import styles from '../../Shared/Styles/FormStyle';
 import SelectCategory from './SelectCategory';
@@ -98,7 +99,7 @@ class ProductForm extends Component {
       name, price, quantity, description, category, error,
     } = this.state;
     return (
-      <form
+      <ValidatorForm
         className={classes.form}
         noValidate
         autoComplete="off"
@@ -108,7 +109,7 @@ class ProductForm extends Component {
         }}
       >
         {error && (<Error error={error} />)}
-        <TextField
+        <TextValidator
           name="name"
           label="Libellé"
           type="text"
@@ -118,8 +119,10 @@ class ProductForm extends Component {
           onChange={this.handleChange}
           margin="normal"
           variant="outlined"
+          validators={['required']}
+          errorMessages={['Ce champ est requis']}
         />
-        <TextField
+        <TextValidator
           name="price"
           label="Prix"
           type="number"
@@ -129,8 +132,10 @@ class ProductForm extends Component {
           onChange={this.handleChange}
           margin="normal"
           variant="outlined"
+          validators={['required', 'minFloat:1']}
+          errorMessages={['Ce champ est requis', 'Veuillez ne fournir que des chiffres positif']}
         />
-        <TextField
+        <TextValidator
           name="quantity"
           label="Quantité"
           type="number"
@@ -140,8 +145,11 @@ class ProductForm extends Component {
           onChange={this.handleChange}
           margin="normal"
           variant="outlined"
+          min="0"
+          validators={['required', 'minNumber:1']}
+          errorMessages={['Ce champ est requis', 'Veuillez ne fournir que des chiffres positif']}
         />
-        <TextField
+        <TextValidator
           name="image"
           label="Image"
           type="file"
@@ -149,7 +157,7 @@ class ProductForm extends Component {
           margin="normal"
           variant="outlined"
         />
-        <TextField
+        <TextValidator
           name="description"
           label="Description"
           type="text"
@@ -160,6 +168,8 @@ class ProductForm extends Component {
           onChange={this.handleChange}
           margin="normal"
           variant="outlined"
+          validators={['required']}
+          errorMessages={['Ce champ est requis']}
         />
         <SelectCategory value={category} onChange={(e) => this.handleChange(e)} />
         <Button
@@ -170,7 +180,7 @@ class ProductForm extends Component {
         >
           {buttonText}
         </Button>
-      </form>
+      </ValidatorForm>
     );
   }
 }

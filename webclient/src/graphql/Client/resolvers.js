@@ -21,6 +21,12 @@ export const defaultState = {
     __typename: 'CartStatus',
     open: false,
   },
+  flashMsg: {
+    __typename: 'FlashMsg',
+    message: null,
+    type: null,
+    status: false,
+  },
 };
 
 export const resolvers = {
@@ -108,6 +114,18 @@ export const resolvers = {
         cartStatus: {
           __typename: 'CartStatus',
           open: !open,
+        },
+      };
+      cache.writeData({ data });
+    },
+
+    addMsgFlash: (_, { message, type, status }, { cache }) => {
+      const data = {
+        flashMsg: {
+          __typename: 'FlashMsg',
+          message,
+          type,
+          status,
         },
       };
       cache.writeData({ data });

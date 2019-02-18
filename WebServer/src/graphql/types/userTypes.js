@@ -12,7 +12,7 @@ type User {
     role: String
     createdAt: String
     updatedAt: String
-    order: Order
+    order: [Order]
 }
 
 type UserLogged {

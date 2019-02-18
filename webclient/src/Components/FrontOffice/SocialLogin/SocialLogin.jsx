@@ -6,7 +6,8 @@ import FacebookButton from './FacebookButton';
 import LOGIN from '../../../graphql/mutations/user/login';
 import UpdateNeworkStatus from '../../../graphql/Client/mutations/user/udpdateNetworkState';
 import UpdateMe from '../../../graphql/Client/mutations/user/upadateMe';
-import Error from '../../Shared/Errors/ErrorMessage';
+import ADD_MSG_FLASH from '../../../graphql/Client/mutations/flashMsg/addFlashMsg';
+import handleError from '../../Shared/Errors/ErrorMessage';
 
 const responseFacebook = (response, login) => {
   login({
@@ -32,11 +33,22 @@ const responseGoogle = (response, login) => {
   });
 };
 
-const SocialLogin = ({ history, updateNeworkStatus, updateMe }) => (
+const SocialLogin = ({
+  history, updateNeworkStatus, updateMe, addMsgFlash,
+}) => (
   <Mutation mutation={LOGIN}>
     {
       (login, { data, loading, error }) => {
         if (loading) return <h1> Chargement... </h1>;
+        if (error) {
+          addMsgFlash({
+            variables: {
+              message: handleError(error),
+              type: 'error',
+              status: true,
+            },
+          });
+        }
         if (data) {
           updateMe({
             variables: {
@@ -54,7 +66,6 @@ const SocialLogin = ({ history, updateNeworkStatus, updateMe }) => (
         }
         return (
           <>
-            {(error && <Error error={error} />)}
             <FacebookButton buttonTitle="Connexion avec" onClick={(response) => responseFacebook(response, login)} />
             <GoogleButton buttonTitle="Connexion avec" onClick={(response) => responseGoogle(response, login)} />
           </>
@@ -66,4 +77,5 @@ const SocialLogin = ({ history, updateNeworkStatus, updateMe }) => (
 export default compose(
   graphql(UpdateMe, { name: 'updateMe' }),
   graphql(UpdateNeworkStatus, { name: 'updateNeworkStatus' }),
+  graphql(ADD_MSG_FLASH, { name: 'addMsgFlash' }),
 )(withRouter(SocialLogin));

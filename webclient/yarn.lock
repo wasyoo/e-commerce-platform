@@ -8767,6 +8767,13 @@ react-facebook-login@^4.1.1:
   resolved "https://registry.yarnpkg.com/react-facebook-login/-/react-facebook-login-4.1.1.tgz#005121236a6ac0dee02099976fb1a3265f9d633e"
   integrity sha512-COnHEHlYGTKipz4963safFAK9PaNTcCiXfPXMS/yxo8El+/AJL5ye8kMJf23lKSSGGPgqFQuInskIHVqGqTvSw==
 
+react-form-validator-core@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/react-form-validator-core/-/react-form-validator-core-0.5.1.tgz#45338782249a7801c688cee540bbe2c11a69031b"
+  integrity sha512-E+PO/F66q4LtvebzJo3R8zoW0il8yjS1cZGjRuV9WBNuTgBa00Ii+qH1EQcIZowhV9T/nkGT3XTp58TangDr3w==
+  dependencies:
+    react-lifecycles-compat "^3.0.2"
+
 react-google-login@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-5.0.0.tgz#b119338c923ae6ad84cbe9bb6ff6df96584b8ef7"
@@ -8806,6 +8813,13 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-material-ui-form-validator@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-material-ui-form-validator/-/react-material-ui-form-validator-2.0.3.tgz#24e3ab4d2ef45d1223877c5d62ee86586679b785"
+  integrity sha512-xXiY1wdlpu5UhDrJGaLwrDCNHl5jTykVJ4oEvc1daDh8hrEzt+ehaZqW6x9JZLH3DS86dHZg7cSZQJYiP7ZPZg==
+  dependencies:
+    react-form-validator-core "0.5.1"
 
 react-router-dom@^4.3.1:
   version "4.3.1"

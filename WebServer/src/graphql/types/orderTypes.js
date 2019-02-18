@@ -5,6 +5,9 @@ const order = `
     items: [OrderItem]
     totalPrice: Float
     totalQuantity: Int
+    createdAt: String
+    updatedAt: String
+    state: String
   }
 
   type OrderItem{
@@ -18,9 +21,10 @@ const order = `
   }
 
   input InputOrder{
-    items: [OrderItemInput]!
+    items: [OrderItemInput]
     totalPrice: Float
     totalQuantity: Int
+    state: String
   }
 `;
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles, TextField, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import styles from '../../Shared/Styles/FormStyle';
 
 class UserForm extends Component {
@@ -50,7 +51,7 @@ class UserForm extends Component {
       firstName, lastName, email, password, phone, address,
     } = this.state;
     return (
-      <form
+      <ValidatorForm
         className={classes.form}
         noValidate
         autoComplete="off"
@@ -71,18 +72,19 @@ class UserForm extends Component {
           });
         }}
       >
-        <TextField
+        <TextValidator
           name="firstName"
           label="Prénom"
           type="text"
-          required
           className={classes.textField}
           value={firstName}
           onChange={this.handleChange}
           margin="normal"
           variant="outlined"
+          validators={['required']}
+          errorMessages={['Ce champ est requis']}
         />
-        <TextField
+        <TextValidator
           name="lastName"
           label="Nom"
           type="text"
@@ -92,28 +94,34 @@ class UserForm extends Component {
           onChange={this.handleChange}
           margin="normal"
           variant="outlined"
+          validators={['required']}
+          errorMessages={['Ce champ est requis']}
         />
-        <TextField
+        <TextValidator
           name="email"
           label="Email"
           type="email"
-          required
           className={classes.textField}
           value={email}
           onChange={this.handleChange}
           margin="normal"
           variant="outlined"
+          validators={['required', 'isEmail']}
+          errorMessages={['Ce champ est requis', 'L\'email n\'est pas valide']}
         />
         { buttonText === 'Enregistrer' && (
-          <TextField
+          <TextValidator
             name="password"
             label="Mot de passe"
             type="password"
+            required
             className={classes.textField}
             value={password}
             onChange={this.handleChange}
             margin="normal"
             variant="outlined"
+            validators={['required']}
+            errorMessages={['Ce champ est requis']}
           />
         )}
         <TextField
@@ -144,7 +152,7 @@ class UserForm extends Component {
         >
           {buttonText}
         </Button>
-      </form>
+      </ValidatorForm>
     );
   }
 }

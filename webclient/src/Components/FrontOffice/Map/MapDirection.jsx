@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import {
   withScriptjs, withGoogleMap, GoogleMap, Marker, DirectionsRenderer,
 } from 'react-google-maps';
+import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 
 class MapDirection extends Component {
   state = {
@@ -71,7 +72,17 @@ class MapDirection extends Component {
           defaultZoom={zoom}
           defaultCenter={center}
         >
-          <Marker position={center} />
+          <Marker position={center}>
+            <InfoBox
+              options={{ closeBoxURL: '', enableEventPropagation: true }}
+            >
+              <div style={{ backgroundColor: 'yellow', opacity: 0.75, padding: '12px' }}>
+                <div style={{ fontSize: '16px', fontColor: '#08233B' }}>
+                  CyberShop
+                </div>
+              </div>
+            </InfoBox>
+          </Marker>
           <Marker position={myPosition} />
           {directions && (
             <>

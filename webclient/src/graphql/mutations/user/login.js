@@ -13,6 +13,7 @@ const LOGIN = gql`
       role
       address
       typeOfAuth
+      avatar
       order {
         id
         items {

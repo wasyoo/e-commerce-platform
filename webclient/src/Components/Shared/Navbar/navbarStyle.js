@@ -5,6 +5,8 @@ export default (theme) => ({
     width: '100%',
     backgroundColor: '#1b1a20',
     position: 'sticky',
+    top: 0,
+    left: 0,
   },
   grow: {
     flexGrow: 1,
@@ -82,16 +84,27 @@ export default (theme) => ({
   topBar: {
     width: '100%',
     height: 50,
-    backgroundColor: '#eee',
+    backgroundColor: '#333',
     display: 'flex',
     justifyContent: 'space-between',
     padding: '0 20px',
     alignItems: 'center',
+    color: '#fff',
   },
   topBarInfo: {
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    margin: '0 20px',
+    margin: '0 10px',
+  },
+  topBarBtn: {
+    textDecoration: 'none',
+    backgroundColor: '#e7c100',
+    color: 'black',
+    padding: 8,
+    borderRadius: 5,
+  },
+  chip: {
+    backgroundColor: '#e7c100',
   },
 });

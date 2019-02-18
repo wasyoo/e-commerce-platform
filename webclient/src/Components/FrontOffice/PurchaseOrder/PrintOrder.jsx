@@ -11,6 +11,7 @@ import styles from './PurchaseOrderStyle';
 import CHANGE_CART_STATUS from '../../../graphql/Client/mutations/cart/changeCartStatus';
 import ADD_ORDER from '../../../graphql/mutations/order/addOrder';
 import GET_CART from '../../../graphql/Client/queries/cart/getCart';
+import GET_ME from '../../../graphql/Client/queries/user/getMe';
 import CLEAN_CART from '../../../graphql/Client/mutations/cart/cleanCart';
 import SEND_ATTACH_EMAIL from '../../../graphql/mutations/order/sendAttachEmail';
 
@@ -24,7 +25,7 @@ const downloadFile = (canvas) => {
 };
 
 const PrintOrder = ({
-  history, classes, changeCartStatus, cleanCart, sendAttachEmail,
+  history, classes, changeCartStatus, cleanCart, sendAttachEmail, getMe,
 }) => (
   <div className={classes.printOrderSection}>
     <div className={classes.buttonAction}>
@@ -71,7 +72,15 @@ const PrintOrder = ({
 
                       history.push('/');
 
-                      await sendAttachEmail({ variables: { input: { file: pdfFile, email: 'wassim.lahbibi@gmail.com' } } });
+                      await sendAttachEmail({
+                        variables: {
+                          input: {
+                            file: pdfFile,
+                            email: getMe.me.user.email,
+                            name: `${getMe.me.user.firstName} ${getMe.me.user.lastName}`,
+                          },
+                        },
+                      });
                     }}
                   >
                     {(loading) ? 'Validation en cours...' : 'Valider'}
@@ -98,4 +107,11 @@ export default compose(
   graphql(CHANGE_CART_STATUS, { name: 'changeCartStatus' }),
   graphql(CLEAN_CART, { name: 'cleanCart' }),
   graphql(SEND_ATTACH_EMAIL, { name: 'sendAttachEmail' }),
+  graphql(
+    GET_ME, {
+      props: ({ data: getMe }) => ({
+        getMe,
+      }),
+    }
+  )
 )(withStyles(styles)(withRouter(PrintOrder)));

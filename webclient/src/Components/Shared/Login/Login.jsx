@@ -7,10 +7,11 @@ import LOGIN from '../../../graphql/mutations/user/login';
 import UpdateNeworkStatus from '../../../graphql/Client/mutations/user/udpdateNetworkState';
 import UpdateMe from '../../../graphql/Client/mutations/user/upadateMe';
 import SocialLogin from '../../FrontOffice/SocialLogin/SocialLogin';
-import Error from '../Errors/ErrorMessage';
+import ADD_MSG_FLASH from '../../../graphql/Client/mutations/flashMsg/addFlashMsg';
+import handleError from '../Errors/ErrorMessage';
 
 const Login = ({
-  history, updateNeworkStatus, updateMe, classes,
+  history, updateNeworkStatus, updateMe, classes, addMsgFlash,
 }) => (
   <div className={classes.container}>
     <h1> Connexion </h1>
@@ -18,6 +19,15 @@ const Login = ({
       {
         (login, { data, loading, error }) => {
           if (loading) return <h1> Chargement... </h1>;
+          if (error) {
+            addMsgFlash({
+              variables: {
+                message: handleError(error),
+                type: 'error',
+                status: true,
+              },
+            });
+          }
           if (data) {
             updateMe({
               variables: {
@@ -45,7 +55,6 @@ const Login = ({
                 <span style={{ margin: '0 20px', fontSize: 20 }}>Ou</span>
                 <hr style={{ width: 100 }} />
               </div>
-              {error && (<Error error={error} />)}
               <LoginForm onSubmit={login} />
             </>
           );
@@ -58,4 +67,5 @@ const Login = ({
 export default compose(
   graphql(UpdateMe, { name: 'updateMe' }),
   graphql(UpdateNeworkStatus, { name: 'updateNeworkStatus' }),
+  graphql(ADD_MSG_FLASH, { name: 'addMsgFlash' }),
 )(withStyles(styles)(Login));

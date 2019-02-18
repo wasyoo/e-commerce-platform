@@ -27,7 +27,7 @@ const EditUser = ({ classes, history, updateMe }) => (
         return (
           <Query query={ME}>
             {({ data: { me } }) => {
-              if (data) {
+              if (me) {
                 return <UserForm buttonText="Modifier" user={me.user} onSubmit={editUser} />;
               }
               return null;

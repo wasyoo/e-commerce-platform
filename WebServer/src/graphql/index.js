@@ -16,7 +16,7 @@ const typeDefs = gql`
 
 const relations = {
   User: {
-    order: (parent, $, { models }) => models.Order.findOne({ userId: parent.id }),
+    order: (parent, $, { models }) => models.Order.find({ userId: parent.id }),
   },
   Product: {
     category: (parent, $, { models }) => models.Category.findById(parent.category),
@@ -26,7 +26,7 @@ const relations = {
     products: (parent, $, { models }) => models.Product.find({ category: parent.id }),
   },
   Order: {
-    user: (parent, $, { models }) => models.User.findById(parent.user),
+    user: (parent, $, { models }) => models.User.findById(parent.userId),
   },
   OrderItem: {
     product: (parent, $, { models }) => models.Product.findById(parent.product),

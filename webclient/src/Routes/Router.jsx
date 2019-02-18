@@ -3,9 +3,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRouter';
 import PrivateAdminRoute from './PrivateAdminRoute';
 import {
-  Login, Home, ProductBO, AddProduct, CategoryBO, Contact,
-  UpdateProduct, AddCategory, UpdateCtegory, PrintOrder,
-  DetailsProduct, Register, Navbar, EditUser, EditPassWord,
+  Login, Home, ProductBO, AddProduct, CategoryBO, Contact, Client,
+  UpdateProduct, AddCategory, UpdateCtegory, PrintOrder, FlashMsg,
+  DetailsProduct, Register, Navbar, EditUser, EditPassWord, Order,
 } from '../Components';
 
 const Router = () => (
@@ -13,6 +13,7 @@ const Router = () => (
     <BrowserRouter>
       <div>
         <Navbar />
+        <FlashMsg />
         <div className="page-container">
           <Route path="/contact" component={Contact} />
           <Route exact path="/" component={Home} />
@@ -28,6 +29,8 @@ const Router = () => (
           <PrivateAdminRoute path="/admin/update-product" component={UpdateProduct} />
           <PrivateAdminRoute path="/admin/add-category" component={AddCategory} />
           <PrivateAdminRoute path="/admin/update-category" component={UpdateCtegory} />
+          <PrivateAdminRoute path="/admin/order" component={Order} />
+          <PrivateAdminRoute path="/admin/client" component={Client} />
         </div>
       </div>
     </BrowserRouter>

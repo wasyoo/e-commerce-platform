@@ -19,7 +19,7 @@ const TopBanner = ({ classes }) => (
         +216 22 222 222 / +216 31 333 333
       </span>
     </div>
-    <Link to="/contact">Contact</Link>
+    <Link className={classes.topBarBtn} to="/contact">Contact</Link>
   </div>
 );
 

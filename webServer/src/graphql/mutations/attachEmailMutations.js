@@ -19,16 +19,27 @@ export const attachEmailResolvers = {
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'nodemaileroyez@gmail.com',
-          pass: 'nodemailer2019',
+          user: process.env.AUTH_USER,
+          pass: process.env.AUTH_PASSWORD,
         },
       });
 
       const mailOptions = {
         from: 'contact@cybershop.tn', // sender address
         to: input.email, // list of receivers
-        subject: 'Subject of your email', // Subject line
-        html: '<h1>Your html here</h1>', // plain text body
+        subject: 'Bon de commande', // Subject line
+        html: `Bonjour <strong>${input.name}</strong>
+              <p>
+                  Merci pour votre commande, 
+                  Nous l'avons reçue et la traiterons dans les plus brefs délais
+              </p>
+              <p>
+                veuillez trouver ci-joint votre bon de commande
+              </p>
+              <p>
+                Vous remerciant de votre confiance, nous vous prions d’agréer,
+                Madame, Monsieur, l’expression de nos cordiales salutations.
+              </p>`, // plain text body
         attachments: [
           {
             filename: 'Bon de commande.pdf',

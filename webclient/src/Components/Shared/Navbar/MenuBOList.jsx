@@ -41,6 +41,28 @@ const menu = [
       },
     ],
   },
+  {
+    text: 'Commandes',
+    icon: 'fas fa-clipboard-list',
+    open: false,
+    dropdown: [
+      {
+        text: 'Liste',
+        link: '/admin/order',
+      },
+    ],
+  },
+  {
+    text: 'Clients',
+    icon: 'fas fa-users',
+    open: false,
+    dropdown: [
+      {
+        text: 'Liste',
+        link: '/admin/client',
+      },
+    ],
+  },
 ];
 
 class MenuList extends React.Component {

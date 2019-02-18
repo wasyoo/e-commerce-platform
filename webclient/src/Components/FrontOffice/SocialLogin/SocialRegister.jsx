@@ -6,7 +6,8 @@ import UPDATE_NETWORK_STATUS from '../../../graphql/Client/mutations/user/udpdat
 import UPDATE_ME from '../../../graphql/Client/mutations/user/upadateMe';
 import GoogleButton from './GoogleButton';
 import FacebookButton from './FacebookButton';
-import Error from '../../Shared/Errors/ErrorMessage';
+import ADD_MSG_FLASH from '../../../graphql/Client/mutations/flashMsg/addFlashMsg';
+import handleError from '../../Shared/Errors/ErrorMessage';
 
 class SocialRegister extends Component {
   responseFacebook = (response, register) => {
@@ -42,12 +43,23 @@ class SocialRegister extends Component {
 
 
   render() {
-    const { updateMe, updateNeworkStatus, history } = this.props;
+    const {
+      updateMe, updateNeworkStatus, history, addMsgFlash,
+    } = this.props;
     return (
       <Mutation mutation={REGISTER}>
         {
           (register, { data, loading, error }) => {
             if (loading) return <h1>Chargement...</h1>;
+            if (error) {
+              addMsgFlash({
+                variables: {
+                  message: handleError(error),
+                  type: 'error',
+                  status: true,
+                },
+              });
+            }
             if (data) {
               updateMe({
                 variables: {
@@ -65,7 +77,6 @@ class SocialRegister extends Component {
             }
             return (
               <>
-                {(error && <Error error={error} />)}
                 <FacebookButton buttonTitle="S'inscrire via" onClick={(response) => this.responseFacebook(response, register)} />
                 <GoogleButton buttonTitle="S'inscrire via" onClick={(response) => this.responseGoogle(response, register)} />
               </>
@@ -80,4 +91,5 @@ class SocialRegister extends Component {
 export default compose(
   graphql(UPDATE_ME, { name: 'updateMe' }),
   graphql(UPDATE_NETWORK_STATUS, { name: 'updateNeworkStatus' }),
+  graphql(ADD_MSG_FLASH, { name: 'addMsgFlash' }),
 )(withRouter(SocialRegister));
