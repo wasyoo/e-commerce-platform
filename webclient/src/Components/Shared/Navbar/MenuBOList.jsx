@@ -42,6 +42,21 @@ const menu = [
     ],
   },
   {
+    text: 'Marque',
+    icon: 'fas fa-building',
+    open: false,
+    dropdown: [
+      {
+        text: 'Liste',
+        link: '/admin/brands',
+      },
+      {
+        text: 'Ajouter',
+        link: '/admin/add-brand',
+      },
+    ],
+  },
+  {
     text: 'Commandes',
     icon: 'fas fa-clipboard-list',
     open: false,

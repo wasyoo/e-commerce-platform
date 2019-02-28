@@ -30,10 +30,35 @@ export default {
     marginBottom: 20,
   },
   media: {
-    height: 450,
+    height: 50,
+    backgroundPosition: 'left',
+    backgroundSize: 'contain',
+    margin: '10px 0 20px',
+  },
+  similarProductItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  similarProducts: {
+    display: 'flex',
+    padding: '50px 0',
+  },
+  similarProductMedia: {
     display: 'flex',
     justifyContent: 'center',
     backgroundPosition: 'center center',
     backgroundSize: 'contain',
+    height: 250,
+    width: '100%',
+  },
+  similarProductPrice: {
+    color: 'red',
+  },
+  similarProductLink: {
+    textDecoration: 'none',
+  },
+  imageMagnify: {
+    zIndex: 1000,
   },
 };

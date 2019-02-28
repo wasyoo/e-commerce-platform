@@ -48,7 +48,7 @@ const FlashMsg = ({ addMsgFlash }) => (
         if (data.flashMsg) {
           return (
             <Snackbar
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
               open={data.flashMsg.status}
               onClose={() => {
                 addMsgFlash({

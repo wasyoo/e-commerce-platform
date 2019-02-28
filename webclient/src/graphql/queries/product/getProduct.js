@@ -10,8 +10,14 @@ const GET_PRODUCT = gql`
     price
     image
     category {
-      id
-    }
+        id
+        name
+      }
+      brand {
+        id
+        name
+        filename
+      }
   }
 }
 `;

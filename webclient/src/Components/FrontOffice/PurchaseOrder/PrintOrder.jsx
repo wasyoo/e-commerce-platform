@@ -14,6 +14,7 @@ import GET_CART from '../../../graphql/Client/queries/cart/getCart';
 import GET_ME from '../../../graphql/Client/queries/user/getMe';
 import CLEAN_CART from '../../../graphql/Client/mutations/cart/cleanCart';
 import SEND_ATTACH_EMAIL from '../../../graphql/mutations/order/sendAttachEmail';
+import ADD_MSG_FLASH from '../../../graphql/Client/mutations/flashMsg/addFlashMsg';
 
 const downloadFile = (canvas) => {
   const imgData = canvas.toDataURL('image/png');
@@ -25,7 +26,7 @@ const downloadFile = (canvas) => {
 };
 
 const PrintOrder = ({
-  history, classes, changeCartStatus, cleanCart, sendAttachEmail, getMe,
+  history, classes, changeCartStatus, cleanCart, sendAttachEmail, getMe, addMsgFlash,
 }) => (
   <div className={classes.printOrderSection}>
     <div className={classes.buttonAction}>
@@ -34,58 +35,69 @@ const PrintOrder = ({
           ({ data: { cart } }) => (
             <Mutation mutation={ADD_ORDER}>
               {
-                (addOrder, { loading }) => (
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    style={{ marginBottom: 10 }}
-                    onClick={async () => {
-                      const input = document.getElementById('capture_order');
-                      const canvas = await html2canvas(input);
+                (addOrder, { loading, data }) => {
+                  if (data) {
+                    addMsgFlash({
+                      variables: {
+                        message: 'Merci pour votre commande, Nous l\'avons reçue et la traiterons dans les plus brefs délais, veuillez consulter votre boite mail pour plus de détails',
+                        type: 'success',
+                        status: true,
+                      },
+                    });
+                  }
+                  return (
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      style={{ marginBottom: 10 }}
+                      onClick={async () => {
+                        const input = document.getElementById('capture_order');
+                        const canvas = await html2canvas(input);
 
-                      const orderItems = cart.items.map((item) => ({
-                        product: item.product.id,
-                        quantity: item.quantity,
-                      }));
+                        const orderItems = cart.items.map((item) => ({
+                          product: item.product.id,
+                          quantity: item.quantity,
+                        }));
 
-                      await addOrder({
-                        variables: {
-                          input: {
-                            items: orderItems,
-                            totalPrice: cart.totalPrice,
-                            totalQuantity: cart.totalQuantity,
+                        await addOrder({
+                          variables: {
+                            input: {
+                              items: orderItems,
+                              totalPrice: cart.totalPrice,
+                              totalQuantity: cart.totalQuantity,
+                            },
                           },
-                        },
-                      });
+                        });
 
-                      const pdfFile = await downloadFile(canvas);
+                        const pdfFile = await downloadFile(canvas);
 
-                      await changeCartStatus({ variables: { open: true } });
+                        await changeCartStatus({ variables: { open: true } });
 
-                      await cleanCart({
-                        variables: {
-                          items: [],
-                          totalPrice: 0,
-                          totalQuantity: 0,
-                        },
-                      });
-
-                      history.push('/');
-
-                      await sendAttachEmail({
-                        variables: {
-                          input: {
-                            file: pdfFile,
-                            email: getMe.me.user.email,
-                            name: `${getMe.me.user.firstName} ${getMe.me.user.lastName}`,
+                        await cleanCart({
+                          variables: {
+                            items: [],
+                            totalPrice: 0,
+                            totalQuantity: 0,
                           },
-                        },
-                      });
-                    }}
-                  >
-                    {(loading) ? 'Validation en cours...' : 'Valider'}
-                  </Button>
-                )
+                        });
+
+                        await sendAttachEmail({
+                          variables: {
+                            input: {
+                              file: pdfFile,
+                              email: getMe.me.user.email,
+                              name: `${getMe.me.user.firstName} ${getMe.me.user.lastName}`,
+                            },
+                          },
+                        });
+
+                        history.push('/');
+                      }}
+                    >
+                      {(loading) ? 'Validation en cours...' : 'Valider'}
+                    </Button>
+                  );
+                }
               }
             </Mutation>
           )
@@ -107,6 +119,7 @@ export default compose(
   graphql(CHANGE_CART_STATUS, { name: 'changeCartStatus' }),
   graphql(CLEAN_CART, { name: 'cleanCart' }),
   graphql(SEND_ATTACH_EMAIL, { name: 'sendAttachEmail' }),
+  graphql(ADD_MSG_FLASH, { name: 'addMsgFlash' }),
   graphql(
     GET_ME, {
       props: ({ data: getMe }) => ({

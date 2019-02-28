@@ -40,14 +40,14 @@ const ProductList = ({ classes, product, changeCartStatus }) => (
       </CardMedia>
     </CardActionArea>
     <CardContent className={classes.info}>
-      <Typography gutterBottom variant="h5" component="h2">
+      <Typography className={classes.infoTitle} gutterBottom variant="h5" component="h2">
         { product.name }
       </Typography>
-      <Typography component="small">
+      <Typography className={classes.infoPrice} component="small">
         { `${product.price} dt` }
       </Typography>
     </CardContent>
-    <CardActions>
+    <CardActions className={classes.buttonDetail}>
       <Button size="small" color="primary">
         <Link to={`/product/${product.id}`}>Détails</Link>
       </Button>

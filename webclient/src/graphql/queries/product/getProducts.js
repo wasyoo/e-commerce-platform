@@ -13,6 +13,11 @@ const GET_PRODUCTS = gql`
         id
         name
       }
+      brand {
+        id
+        name
+        filename
+      }
     }
   }
 `;

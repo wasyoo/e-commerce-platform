@@ -84,7 +84,7 @@ class Order extends Component {
                 },
               ]}
               actions={[
-                {
+                (item) => ({
                   icon: 'access_time',
                   tooltip: 'En cours de traitement',
                   iconProps: {
@@ -98,8 +98,9 @@ class Order extends Component {
                       this.changeState(id, 'processing');
                     }
                   },
-                },
-                {
+                  disabled: item.state === 'processing',
+                }),
+                (item) => ({
                   icon: 'done_outline',
                   tooltip: 'Achevée',
                   iconProps: {
@@ -113,7 +114,8 @@ class Order extends Component {
                       this.changeState(id, 'completed');
                     }
                   },
-                },
+                  disabled: item.state === 'completed',
+                }),
                 {
                   icon: 'delete_forever',
                   tooltip: 'Annuler la commande',

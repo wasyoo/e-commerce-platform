@@ -1,18 +1,10 @@
 import React from 'react';
-import { withStyles, Drawer } from '@material-ui/core';
+import { withStyles, Drawer, Button } from '@material-ui/core';
 import { Query, Mutation } from 'react-apollo';
 import Cart from './Cart';
+import styles from './CartStyle';
 import GET_CART_STATUS from '../../../graphql/Client/queries/cart/getCartStatus';
 import CHANGE_CART_STATUS from '../../../graphql/Client/mutations/cart/changeCartStatus';
-
-const styles = {
-  drawer: {
-    width: '50vw',
-    height: '100%',
-    overflowY: 'scroll',
-    backgroundColor: '#1b1a20',
-  },
-};
 
 const FloatCart = ({ classes }) => (
   <Query query={GET_CART_STATUS}>
@@ -30,6 +22,16 @@ const FloatCart = ({ classes }) => (
                 }}
               >
                 <div className={classes.drawer} tabIndex={0} role="button">
+                  <Button
+                    className={classes.btnClose}
+                    onClick={() => {
+                      changeCartStatus();
+                    }}
+                  >
+                    <i className="material-icons">
+                    close
+                    </i>
+                  </Button>
                   <Cart />
                 </div>
               </Drawer>

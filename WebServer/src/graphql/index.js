@@ -1,4 +1,4 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer, gql } from 'apollo-server-express';
 import Type from './types';
 import { queriesType, queries } from './queries';
 import { mutationsType, mutations } from './mutations';
@@ -7,6 +7,7 @@ import User from '../db/models/user';
 import Product from '../db/models/product';
 import Category from '../db/models/category';
 import Order from '../db/models/order';
+import Brand from '../db/models/brand';
 
 const typeDefs = gql`
       ${Type}
@@ -20,6 +21,7 @@ const relations = {
   },
   Product: {
     category: (parent, $, { models }) => models.Category.findById(parent.category),
+    brand: (parent, $, { models }) => models.Brand.findById(parent.brand),
   },
   Category: {
     parent: (parent, $, { models }) => models.Category.findById(parent.parent),
@@ -45,6 +47,7 @@ export default new ApolloServer({
         Product,
         Category,
         Order,
+        Brand,
       },
     };
   },

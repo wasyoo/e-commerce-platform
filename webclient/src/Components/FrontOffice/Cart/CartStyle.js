@@ -124,4 +124,30 @@ export default {
     padding: '10px 30px',
     backgroundColor: '#1b1a20',
   },
+  drawer: {
+    width: '50vw',
+    height: '100%',
+    overflowY: 'scroll',
+    backgroundColor: '#1b1a20',
+    position: 'relative',
+  },
+  btnClose: {
+    color: '#fff',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    background: '#000',
+    zIndex: 1000,
+    '& i': {
+      fontSize: 40,
+    },
+    '& :hover': {
+      color: 'red',
+    },
+  },
+  '@media (max-width: 600px)': {
+    drawer: {
+      width: '100vw',
+    },
+  },
 };

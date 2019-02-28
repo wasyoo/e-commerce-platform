@@ -67,6 +67,13 @@ class SocialRegister extends Component {
                 },
               });
               localStorage.setItem('token', data.register.token);
+              addMsgFlash({
+                variables: {
+                  message: `Bienvenu ${data.register.user.firstName} ${data.register.user.lastName}`,
+                  type: 'success',
+                  status: true,
+                },
+              });
               updateNeworkStatus({
                 variables: {
                   isConnected: true,

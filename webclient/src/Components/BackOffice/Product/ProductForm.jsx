@@ -5,6 +5,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import PropTypes from 'prop-types';
 import styles from '../../Shared/Styles/FormStyle';
 import SelectCategory from './SelectCategory';
+import SelectBrand from './SelectBrand';
 import Error from '../../Shared/Errors/ErrorMessage';
 
 class ProductForm extends Component {
@@ -29,6 +30,7 @@ class ProductForm extends Component {
     quantity: this.props.product.quantity || '',
     description: this.props.product.description || '',
     category: (this.props.product.category && this.props.product.category.id) || '',
+    brand: (this.props.product.brand && this.props.product.brand.id) || '',
   }
 
   handleChange = (event) => {
@@ -40,7 +42,7 @@ class ProductForm extends Component {
 
   handleSubmit = async (event) => {
     const {
-      name, price, quantity, description, id, category,
+      name, price, quantity, description, id, category, brand,
     } = this.state;
 
     const [files] = event.target.image.files;
@@ -78,6 +80,7 @@ class ProductForm extends Component {
           description,
           image,
           category,
+          brand,
         },
       },
     });
@@ -96,7 +99,7 @@ class ProductForm extends Component {
   render() {
     const { classes, buttonText } = this.props;
     const {
-      name, price, quantity, description, category, error,
+      name, price, quantity, description, category, error, brand,
     } = this.state;
     return (
       <ValidatorForm
@@ -172,6 +175,7 @@ class ProductForm extends Component {
           errorMessages={['Ce champ est requis']}
         />
         <SelectCategory value={category} onChange={(e) => this.handleChange(e)} />
+        <SelectBrand value={brand} onChange={(e) => this.handleChange(e)} />
         <Button
           type="submit"
           color="primary"

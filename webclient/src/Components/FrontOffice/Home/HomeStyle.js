@@ -20,8 +20,11 @@ export default {
     },
   },
   card: {
-    maxWidth: 345,
-    // border: '1px solid #1b1a20',
+    height: 500,
+    position: 'relative',
+    '& hover': {
+      background: '#eee',
+    },
   },
   media: {
     height: 350,
@@ -33,6 +36,22 @@ export default {
   info: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'baseline',
+  },
+  buttonDetail: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    justifyContent: 'flex-end',
+    textDecoration: 'none',
+  },
+  infoTitle: {
+    flex: 5,
+  },
+  infoPrice: {
+    flex: 2,
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
 };

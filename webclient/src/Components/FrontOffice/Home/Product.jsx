@@ -9,17 +9,20 @@ const Product = () => (
     <Query query={getProducts}>
       {({ loading, data }) => {
         if (loading) return <h1> Chargement... </h1>;
-        return (
-          <Grid container spacing={24}>
-            {
-              data.products.map((product) => (
-                <Grid key={product.id} item xs={12} sm={3}>
-                  <ProductList product={product} />
-                </Grid>
-              ))
-            }
-          </Grid>
-        );
+        if (data.products.length) {
+          return (
+            <Grid container spacing={8}>
+              {
+                data.products.map((product) => (
+                  <Grid key={product.id} item xs={12} md={3} sm={6}>
+                    <ProductList product={product} />
+                  </Grid>
+                ))
+              }
+            </Grid>
+          );
+        }
+        return <p>{'Il n\'y a pas de produit pour le moment'}</p>;
       }
       }
     </Query>

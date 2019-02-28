@@ -17,6 +17,10 @@ import Contact from './FrontOffice/Contact/Conatct';
 import FlashMsg from './Shared/FlashMSg/FlashMsg';
 import Order from './BackOffice/Order/Order';
 import Client from './BackOffice/Client/Client';
+import AddBrand from './BackOffice/Brand/AddBrand';
+import BrandList from './BackOffice/Brand/BrandList';
+import UpdateBrand from './BackOffice/Brand/UpdateBrand';
+import Error404 from './Shared/Errors/Error404';
 
 export {
   Login,
@@ -38,4 +42,8 @@ export {
   FlashMsg,
   Order,
   Client,
+  AddBrand,
+  BrandList,
+  UpdateBrand,
+  Error404,
 };

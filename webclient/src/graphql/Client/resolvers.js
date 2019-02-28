@@ -41,6 +41,7 @@ export const resolvers = {
         },
       };
       cache.writeData({ data });
+      return null;
     },
 
     updateMe: (_, { user }, { cache }) => {
@@ -51,6 +52,7 @@ export const resolvers = {
         },
       };
       cache.writeData({ data });
+      return null;
     },
 
     deleteItem: (_, { input }, { cache }) => {
@@ -59,6 +61,7 @@ export const resolvers = {
       data.cart.totalQuantity -= input.quantity;
       data.cart.totalPrice -= (input.product.price * input.quantity);
       cache.writeData({ data });
+      return null;
     },
 
     addOneItem: (_, { input }, { cache }) => {
@@ -82,6 +85,7 @@ export const resolvers = {
         data.cart.totalPrice += Number(input.price);
       }
       cache.writeData({ data });
+      return null;
     },
 
     minusOneItem: (_, { id }, { cache }) => {
@@ -95,6 +99,7 @@ export const resolvers = {
         return item;
       });
       cache.writeData({ data });
+      return null;
     },
 
     cleanCart: (_, { items, totalPrice, totalQuantity }, { cache }) => {
@@ -107,6 +112,7 @@ export const resolvers = {
         },
       };
       cache.writeData({ data });
+      return null;
     },
 
     changeCartStatus: (_, { open }, { cache }) => {      
@@ -117,6 +123,7 @@ export const resolvers = {
         },
       };
       cache.writeData({ data });
+      return null;
     },
 
     addMsgFlash: (_, { message, type, status }, { cache }) => {
@@ -129,6 +136,7 @@ export const resolvers = {
         },
       };
       cache.writeData({ data });
+      return null;
     },
   },
 };

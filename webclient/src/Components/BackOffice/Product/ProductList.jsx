@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import MaterialTable from 'material-table';
-import { withStyles } from '@material-ui/core/styles';
-import CardMedia from '@material-ui/core/CardMedia';
+import { withStyles, CardMedia } from '@material-ui/core';
 import styles from './ProductStyle';
 import { localizationFr } from '../../../Config/config';
 
@@ -40,6 +39,17 @@ class ProductList extends Component {
               title: 'Catégorie',
               field: 'category',
               render: (item) => item.category && item.category.name,
+            },
+            {
+              title: 'Marque',
+              field: 'brand',
+              render: (item) => item.brand && (
+                <CardMedia
+                  className={classes.brandMedia}
+                  image={`http://localhost:4000/image/${item.brand.filename}`}
+                  title={item.brand.name}
+                />
+              ),
             },
           ]}
           actions={[

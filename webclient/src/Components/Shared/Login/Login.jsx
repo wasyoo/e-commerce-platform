@@ -35,6 +35,13 @@ const Login = ({
               },
             });
             localStorage.setItem('token', data.login.token);
+            addMsgFlash({
+              variables: {
+                message: `Bienvenu ${data.login.user.firstName} ${data.login.user.lastName}`,
+                type: 'success',
+                status: true,
+              },
+            });
             updateNeworkStatus({
               variables: {
                 isConnected: true,

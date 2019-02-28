@@ -1,12 +1,15 @@
 import React from 'react';
-import { Mutation } from 'react-apollo';
+import { Mutation, compose, graphql } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import ProductForm from './ProductForm';
 import UPDATE_PRODUCT from '../../../graphql/mutations/product/upadateProduct';
 import GET_PRODUCTS from '../../../graphql/queries/product/getProducts';
+import ADD_MSG_FLASH from '../../../graphql/Client/mutations/flashMsg/addFlashMsg';
 import styles from '../../Shared/Styles/FormStyle';
 
-const UpdateProduct = ({ classes, history, location: { product } }) => (
+const UpdateProduct = ({
+  classes, history, location: { product }, addMsgFlash,
+}) => (
   <div className={classes.container}>
     <h1> Éditer le Produit </h1>
     <Mutation
@@ -16,6 +19,13 @@ const UpdateProduct = ({ classes, history, location: { product } }) => (
       {(EditPhoto, { data, loading }) => {
         if (loading) return <h3>Modification en cours ...</h3>;
         if (data) {
+          addMsgFlash({
+            variables: {
+              message: 'Le produit a été mis à jour avec succès',
+              type: 'success',
+              status: true,
+            },
+          });
           history.push('/admin/product');
         }
         return <ProductForm buttonText="Modifier" product={product} onSubmit={EditPhoto} />;
@@ -25,4 +35,6 @@ const UpdateProduct = ({ classes, history, location: { product } }) => (
   </div>
 );
 
-export default withStyles(styles)(UpdateProduct);
+export default compose(
+  graphql(ADD_MSG_FLASH, { name: 'addMsgFlash' })
+)(withStyles(styles)(UpdateProduct));

@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+button:disabled,
+button[disabled]{
+  opacity: 0.5;
+}
 .page-container {
   /* padding: 20px 30px; */
   margin: 30px 20px;
