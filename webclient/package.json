@@ -16,7 +16,7 @@
     "graphql": "^14.1.0",
     "graphql-tag": "^2.10.0",
     "html2canvas": "^1.0.0-alpha.12",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "material-table": "^1.13.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
