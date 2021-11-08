@@ -9,7 +9,7 @@
     "start": "nodemon --exec babel-node --presets env,stage-2 src/index.js"
   },
   "dependencies": {
-    "apollo-server": "^2.3.1",
+    "apollo-server": "^2.25.3",
     "apollo-server-express": "^2.4.2",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
